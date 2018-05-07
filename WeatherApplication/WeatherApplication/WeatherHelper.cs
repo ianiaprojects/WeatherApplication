@@ -12,15 +12,13 @@ namespace WeatherApplication
         private static string AppId = "5a9f5e7ae554f4156e5442293048f920";
         private static WeatherResult response;
 
-        internal static async Task<bool> init(string cityName)
+        internal static async Task init(string cityName)
         {
             var httpClient = new HttpClient();
             var requestUri = $"http://api.openweathermap.org/data/2.5/forecast?q={cityName}&appid={AppId}";
             var json = await httpClient.GetStringAsync(requestUri);
 
             response = JsonConvert.DeserializeObject<WeatherResult>(json);
-
-            return true; // async void methods are not okay
         }
 
         internal static BitmapImage GetImage()
